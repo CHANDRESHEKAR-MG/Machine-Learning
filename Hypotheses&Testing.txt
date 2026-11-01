@@ -1,0 +1,269 @@
+1. What is a Hypothesis?
+
+A Hypothesis is an assumption or a prediction that we make about something, which can be tested using data.
+
+Example:
+
+You assume that students who study more hours get higher marks.
+
+This assumption is called a hypothesis.
+
+2. What is Hypothesis Testing?
+
+Hypothesis Testing is a statistical process used to check whether our assumption is supported by actual data or not.
+
+Example:
+
+You assume that students who study more hours get higher marks.
+
+To test this:
+
+Collect marks and study hours from 100 students.
+Analyse the collected data.
+Check whether students who study more actually score higher marks.
+Based on statistical evidence, decide whether your assumption is supported.
+Difference between Hypothesis and Hypothesis Testing
+Hypothesis	Hypothesis Testing
+An assumption or prediction	A process to test that assumption
+What we believe	Checking whether evidence supports it
+Students who study more score higher	Collecting data to verify this claim
+Interview-ready answer
+Hypothesis: A testable assumption or prediction about something.
+Hypothesis Testing: A statistical method used to determine whether an assumption is supported by sample data.
+
+Easy way to remember:   
+
+Hypothesis = Making an assumption.
+
+Hypothesis Testing = Checking whether that assumption is supported by data.
+
+
+
+
+
+
+
+
+
+1. What is a Hypothesis?
+Interview Question: What is a Hypothesis?
+
+Answer:
+
+A hypothesis is an assumption or proposed explanation about a population or a relationship between variables that can be tested using data.
+
+In Machine Learning, a hypothesis can also refer to a candidate function or model that maps input features to predicted outputs.
+
+There are two commonly discussed meanings:
+
+1. Statistical Hypothesis
+
+An assumption about a population that we test using statistical methods.
+
+Example:
+
+A company claims that its employees work an average of 8 hours per day.
+
+We can collect employee data and test whether this claim is true.
+
+2. ML Hypothesis Function
+
+A mathematical function that maps input data to predicted output.
+
+Example:
+
+Suppose you want to predict house prices based on area.
+
+A simple hypothesis function is:
+
+$$ h(x)=wx+b $$
+
+Where:
+
+\(h(x)\) = Predicted house price.
+\(x\) = House area.
+\(w\) = Weight or coefficient.
+\(b\) = Bias or intercept.
+
+The ML algorithm learns suitable values of \(w\) and \(b\) from training data.
+
+2. What is Hypothesis Testing?
+Interview Question: What is Hypothesis Testing?
+
+Answer:
+
+Hypothesis Testing is a statistical method used to determine whether there is sufficient evidence in sample data to support or reject a claim about a population.
+
+In simple words, we use data and statistical calculations to check whether an assumption is supported by evidence.
+
+Real-world example
+
+Imagine a company claims:
+
+"Our new training program improves employee productivity."
+
+How can we verify this claim?
+
+We cannot simply assume it is true.
+
+Instead:
+
+Collect productivity data before training.
+Collect productivity data after training.
+Compare the results.
+Perform a statistical test.
+Determine whether the observed improvement is statistically significant.
+
+This process is called Hypothesis Testing.
+
+3. Types of Hypotheses
+
+There are two main hypotheses in statistical hypothesis testing.
+
+A. Null Hypothesis (H₀)
+
+The Null Hypothesis represents the default assumption that there is no effect, no difference or no relationship.
+
+Example:
+
+A company claims that a new training program does not improve employee productivity.
+
+$$ H_0: \text{There is no improvement in productivity} $$
+B. Alternative Hypothesis (H₁ or Hₐ)
+
+The Alternative Hypothesis represents the claim that there is an effect, difference or relationship.
+
+Example:
+
+$$ H_1: \text{The training program improves productivity} $$
+
+Remember:
+
+Null Hypothesis (H₀)	Alternative Hypothesis (H₁)
+No effect	Effect exists
+No difference	Difference exists
+Default assumption	Competing assumption
+Tested using statistical evidence	Supported when evidence against H₀ is sufficient
+4. How Does Hypothesis Testing Work?
+
+Let's understand using an example.
+
+Suppose a college claims that its students score an average of 70 marks in an examination.
+
+You want to test this claim.
+
+Step 1: Define the hypotheses
+
+Null Hypothesis:
+
+$$ H_0:\mu=70 $$
+
+Alternative Hypothesis:
+
+$$ H_1:\mu\neq70 $$
+
+Here, μ represents the true population mean.
+
+Step 2: Collect sample data
+
+Suppose you randomly select 50 students and calculate their average marks.
+
+Sample mean = 75.
+
+Step 3: Select significance level
+
+Usually:
+
+$$ \alpha=0.05 $$
+
+This represents a 5% significance level.
+
+Step 4: Perform a statistical test
+
+Depending on the data and assumptions, we can use:
+
+Z-test.
+T-test.
+Chi-Square test.
+ANOVA.
+Step 5: Calculate the P-value
+
+The P-value tells us how likely it would be to observe a result at least as extreme as the one obtained, assuming the null hypothesis is true.
+
+Step 6: Make a decision
+Condition	Decision
+P-value ≤ 0.05	Reject Null Hypothesis
+P-value > 0.05	Fail to reject Null Hypothesis
+
+Important: We don't prove the null hypothesis is true. We only determine whether there is sufficient evidence to reject it.
+
+5. What is a P-value?
+Interview Question: What is a P-value?
+
+Answer:
+
+A P-value is the probability of observing the obtained result, or a more extreme result, assuming the null hypothesis is true.
+
+Example:
+
+Suppose:
+
+$$ P=0.03 $$
+
+And:
+
+$$ \alpha=0.05 $$
+
+Since:
+
+$$ 0.03<0.05 $$
+
+We reject the Null Hypothesis.
+
+This means there is statistically significant evidence against the null hypothesis.
+
+Important: A P-value of 0.03 does NOT mean there is a 97% probability that the alternative hypothesis is true.
+
+6. What are Type I and Type II Errors?
+
+This is another frequently asked interview question.
+
+Error	Meaning	Example
+Type I Error	Rejecting a true Null Hypothesis	Concluding a medicine works when it actually doesn't
+Type II Error	Failing to reject a false Null Hypothesis	Concluding there is insufficient evidence that a medicine works when it actually does
+
+Remember:
+
+Type I Error = False Positive.
+Type II Error = False Negative.
+7. Types of Statistical Tests
+Test	Purpose
+Z-test	Tests means or proportions under suitable large-sample or known-variance conditions
+T-test	Compares means when population variance is unknown under suitable assumptions
+Chi-Square Test	Tests relationships between categorical variables or goodness of fit
+ANOVA	Compares means across three or more groups
+F-test	Compares variances or tests model significance in certain settings
+8. What is the Connection Between Hypothesis Testing and Machine Learning?
+
+This is important to understand.
+
+Hypothesis Testing belongs primarily to Statistics, but statistical concepts are useful in Machine Learning.
+
+For example:
+
+Feature Selection: Statistical tests can help identify features associated with the target.
+Model Comparison: Hypothesis tests can help compare model performance.
+A/B Testing: Used to determine whether a new recommendation algorithm performs better than the existing one.
+Data Analysis: Helps understand whether observed relationships are statistically significant.
+Example: Comparing Two ML Models
+
+Suppose an e-commerce company has two recommendation systems.
+
+Model A: Existing recommendation system.
+Model B: New recommendation system.
+
+You want to determine whether Model B significantly improves conversion rates.
+
+You collect user data and perform a statistical test.
+
+The result helps determine whether the observed improvement is statistically significant or could reasonably be explained by random variation.
