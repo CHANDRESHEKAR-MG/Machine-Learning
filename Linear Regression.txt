@@ -1,0 +1,624 @@
+# 1. What is Linear Regression?
+
+Linear Regression is a **Supervised Machine Learning algorithm** used to predict a continuous numerical value based on one or more input features.
+
+Examples:
+
+* Predicting house prices based on area.
+* Predicting salary based on years of experience.
+* Predicting exam marks based on study hours.
+* Predicting car prices based on mileage and age.
+
+### Example
+
+Suppose we have the following dataset:
+
+| Study hours (X) | Exam marks (Y) |
+| --------------: | -------------: |
+|               1 |             20 |
+|               2 |             30 |
+|               3 |             40 |
+|               4 |             50 |
+|               5 |             60 |
+
+Here:
+
+* X = Independent variable (input).
+* Y = Dependent variable (output).
+
+Our objective is to build a model that learns the relationship between study hours and marks.
+
+For example, if a student studies for 6 hours, our model should predict their marks.
+
+But how does the model learn this relationship?
+
+It finds the **best-fit line** through the available data points.
+
+# 2. Linear Regression Equation
+
+The most important equation in Linear Regression is:
+
+genui{"learning_viz":{"type_id":"LEAST_SQUARE_REGRESSION","initial_values":{"fitMode":"with_intercept"}}}
+
+The equation is represented by:
+
+$$
+\hat{y}=b_0+b_1x
+$$
+
+Let's understand each term.
+
+| Symbol | Meaning             |
+| ------ | ------------------- |
+| ŷ      | Predicted output    |
+| x      | Input feature       |
+| b₀     | Intercept           |
+| b₁     | Slope (coefficient) |
+
+### What is Intercept (b₀)?
+
+The intercept represents the predicted value of Y when X = 0.
+
+For example:
+
+$$
+\hat{y}=10+5x
+$$
+
+When x = 0:
+
+$$
+\hat{y}=10+5(0)=10
+$$
+
+Therefore, the intercept is 10.
+
+### What is Slope (b₁)?
+
+Slope tells us how much Y changes when X increases by one unit.
+
+In our equation:
+
+$$
+\hat{y}=10+5x
+$$
+
+The slope is 5.
+
+This means:
+
+* When study hours increase by 1, predicted marks increase by 5.
+* When study hours increase by 2, predicted marks increase by 10.
+
+**Important:** Slope determines the direction and steepness of the regression line.
+
+There are three possibilities:
+
+1. Positive slope: X increases, Y increases.
+2. Negative slope: X increases, Y decreases.
+3. Zero slope: X changes, but predicted Y remains constant.
+
+### Mathematical formula for slope
+
+For simple Linear Regression:
+
+$$
+b_1=
+\frac{\sum(x_i-\bar{x})(y_i-\bar{y})}
+{\sum(x_i-\bar{x})^2}
+$$
+
+And intercept:
+
+$$
+b_0=\bar{y}-b_1\bar{x}
+$$
+
+You don't need to memorize the derivation immediately. Understand what these formulas calculate.
+
+---
+
+# 3. What is the Cost Function?
+
+Now comes an important concept.
+
+Suppose our actual marks are 20, but our model predicts 25.
+
+The prediction error is:
+
+$$
+Error=Actual-Predicted
+$$
+
+$$
+Error=20-25=-5
+$$
+
+Our objective is to minimize the prediction errors.
+
+But how do we measure the total error?
+
+We use a **Cost Function**.
+
+The most commonly used cost function in Linear Regression is Mean Squared Error (MSE).
+
+### Mean Squared Error (MSE)
+
+$$
+MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2
+$$
+
+Where:
+
+* n = Number of observations.
+* y = Actual value.
+* ŷ = Predicted value.
+
+Why do we square the errors?
+
+1. Negative errors become positive.
+2. Larger errors receive more penalty.
+3. It makes mathematical optimization easier.
+
+**Our objective is to find the values of b₀ and b₁ that produce the minimum MSE.**
+
+This brings us to optimization.
+
+# 4. What are Local Minima and Global Minima?
+
+These are fundamental concepts in Machine Learning.
+
+First, imagine a ball rolling down a hill.
+
+The ball tries to reach the lowest possible point.
+
+Similarly, in ML, our algorithm tries to find the minimum value of the cost function.
+
+### A. Global Minimum
+
+Global minimum is the lowest possible value of a cost function across its entire domain.
+
+Imagine a valley with multiple low points.
+
+The deepest point is the global minimum.
+
+### B. Local Minimum
+
+A local minimum is a point that is lower than the nearby points, but it may not be the lowest point overall.
+
+Imagine a small valley on the side of a mountain.
+
+It is locally the lowest point, but another valley might be deeper.
+
+**Difference:**
+
+| Local Minimum                | Global Minimum                  |
+| ---------------------------- | ------------------------------- |
+| Lowest in a nearby region    | Lowest across the entire domain |
+| May not be the best solution | Best possible solution          |
+| Other lower points may exist | No lower point exists           |
+
+### Important for Linear Regression
+
+Here is something you should remember for interviews:
+
+Ordinary Linear Regression with MSE has a convex cost function.
+
+This means it does not have multiple local minima.
+
+For a convex cost function, every local minimum is also a global minimum.
+
+This makes Linear Regression easier to optimize compared with many complex ML models.
+
+---
+
+# 5. What is Gradient Descent?
+
+Now we understand that our objective is to minimize the cost function.
+
+But how does the model find the minimum?
+
+One popular optimization algorithm is **Gradient Descent**.
+
+Gradient Descent is an optimization algorithm that iteratively updates model parameters to minimize the cost function.
+
+Think of standing on a mountain.
+
+You want to reach the bottom.
+
+What would you do?
+
+1. Check which direction goes downward.
+2. Take a small step.
+3. Check the direction again.
+4. Continue until you reach the bottom.
+
+Gradient Descent works similarly.
+
+### Important equation
+
+The parameter update rule is:
+
+$$
+\theta_{new}=\theta_{old}-\alpha
+\frac{\partial J(\theta)}{\partial\theta}
+$$
+
+Where:
+
+| Symbol | Meaning               |
+| ------ | --------------------- |
+| θ      | Model parameter       |
+| α      | Learning rate         |
+| J(θ)   | Cost function         |
+| ∂J/∂θ  | Gradient (derivative) |
+
+For Linear Regression, we update both parameters:
+
+**Slope update:**
+
+$$
+b_1:=b_1-\alpha\frac{\partial J}{\partial b_1}
+$$
+
+**Intercept update:**
+
+$$
+b_0:=b_0-\alpha\frac{\partial J}{\partial b_0}
+$$
+
+The algorithm keeps updating these values to reduce MSE.
+
+# 6. What is Learning Rate?
+
+Learning rate determines how big a step Gradient Descent takes during optimization.
+
+It is represented by:
+
+$$
+\alpha
+$$
+
+There are three situations.
+
+**1. Learning rate too small**
+
+* Takes very small steps.
+* Reaches the minimum slowly.
+* Training takes longer.
+
+**2. Learning rate too large**
+
+* Takes very large steps.
+* May jump over the minimum.
+* Can fail to converge or even diverge.
+
+**3. Appropriate learning rate**
+
+* Takes reasonable steps.
+* Moves towards the minimum.
+* Helps optimization converge efficiently.
+
+# 7. What is Convergence?
+
+Convergence means the optimization algorithm is approaching a stable solution where further iterations produce very little improvement.
+
+In simple terms:
+
+The algorithm keeps reducing the cost function until it reaches a point where the cost stops changing significantly.
+
+For example:
+
+| Iteration |  MSE |
+| --------: | ---: |
+|         1 |  100 |
+|         2 |   60 |
+|         3 |   30 |
+|         4 |   15 |
+|         5 |    8 |
+|         6 |    4 |
+|         7 |    2 |
+|         8 |  1.2 |
+|         9 |  1.1 |
+|        10 | 1.09 |
+
+Notice how the MSE gradually decreases.
+
+Eventually, the improvement becomes very small.
+
+This is convergence.
+
+### Difference between Gradient Descent and Convergence
+
+* Gradient Descent = Optimization algorithm.
+* Convergence = The condition or state the algorithm approaches.
+
+**Interview question:** What happens if the learning rate is too high?
+
+Answer: Gradient Descent may overshoot the minimum, oscillate around it or diverge instead of converging.
+
+---
+
+# 8. What is R-Squared (R²)?
+
+Now let's understand how to evaluate our Linear Regression model.
+
+Suppose we train a model to predict house prices.
+
+How do we know whether our model is good?
+
+One important evaluation metric is R-Squared.
+
+R² is also called the **Coefficient of Determination**.
+
+It tells us how much of the variation in the dependent variable is explained by our regression model.
+
+### Formula
+
+$$
+R^2=1-\frac{SS_{res}}{SS_{tot}}
+$$
+
+Where:
+
+**SSres (Residual Sum of Squares)**
+
+$$
+SS_{res}=\sum(y_i-\hat{y_i})^2
+$$
+
+It measures the unexplained variation (prediction errors).
+
+**SStot (Total Sum of Squares)**
+
+$$
+SS_{tot}=\sum(y_i-\bar{y})^2
+$$
+
+It measures the total variation in actual values around their mean.
+
+### Example
+
+Suppose our model produces:
+
+$$
+R^2=0.85
+$$
+
+Converting it into a percentage:
+
+$$
+0.85\times100=85\%
+$$
+
+This means:
+
+**85% of the variation in the target variable is explained by our model.**
+
+The remaining 15% is unexplained by the model.
+
+### Understanding R² values
+
+| R² value | Interpretation                          |
+| -------: | --------------------------------------- |
+|      1.0 | Perfect fit                             |
+|      0.9 | Explains 90% of variation               |
+|      0.8 | Explains 80% of variation               |
+|      0.5 | Explains 50% of variation               |
+|        0 | No improvement over predicting the mean |
+| Negative | Worse than predicting the mean          |
+
+Important: A high R² does not necessarily mean your model is good at predicting unseen data. Always evaluate it using test data too.
+
+---
+
+# 9. What is Adjusted R-Squared?
+
+This is another important evaluation metric.
+
+First, understand a problem with ordinary R².
+
+Suppose you build a model to predict house prices.
+
+Initially, you use:
+
+* House area
+* Number of bedrooms
+
+Your R² is 0.80.
+
+Now you add more features:
+
+* House colour
+* Number of windows
+* Distance from a particular shop
+
+Your R² might increase even if some of these features are not useful.
+
+Why?
+
+Because ordinary R² generally never decreases when additional predictors are added to a model trained on the same observations.
+
+This can create a misleading impression.
+
+To address this, we use **Adjusted R-Squared**.
+
+### Formula
+
+$$
+Adjusted\ R^2 =
+1-(1-R^2)\frac{n-1}{n-p-1}
+$$
+
+Where:
+
+* R² = Ordinary R-Squared.
+* n = Number of observations.
+* p = Number of independent variables (predictors).
+
+### Why do we use Adjusted R²?
+
+It considers the number of independent variables in the model.
+
+* If a useful feature is added, Adjusted R² may increase.
+* If an unnecessary feature is added, Adjusted R² may decrease.
+
+### Difference between R² and Adjusted R²
+
+| R²                                                            | Adjusted R²                                                       |
+| ------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Measures explained variation                                  | Measures explained variation with a complexity penalty            |
+| Generally increases or stays the same when features are added | Can increase or decrease                                          |
+| Does not penalize unnecessary features                        | Penalizes additional predictors                                   |
+| Useful for measuring model fit                                | Useful when comparing models with different numbers of predictors |
+
+**Interview tip:** When comparing Linear Regression models containing different numbers of independent variables, Adjusted R² is generally more informative than ordinary R².
+
+---
+
+# 10. What is Correlation (r)?
+
+One more concept you should understand because it is closely related to Linear Regression.
+
+Correlation measures the strength and direction of a linear relationship between two variables.
+
+It is represented by:
+
+$$
+-1\leq r\leq +1
+$$
+
+| Correlation | Meaning                      |
+| ----------: | ---------------------------- |
+|          +1 | Perfect positive correlation |
+|           0 | No linear correlation        |
+|          -1 | Perfect negative correlation |
+
+Examples:
+
+* Study hours and marks: potentially positive correlation.
+* Car age and resale value: potentially negative correlation.
+* Shoe size and exam marks: likely little or no correlation.
+
+### Difference between r and R²
+
+Don't confuse these two.
+
+| Correlation (r)                                       | R-Squared (R²)                                           |
+| ----------------------------------------------------- | -------------------------------------------------------- |
+| Measures direction and strength of linear association | Measures explained variation                             |
+| Ranges from -1 to +1                                  | Can be negative or range up to 1                         |
+| Can be negative                                       | In simple OLS regression with an intercept, it equals r² |
+| Used to understand relationships                      | Used to evaluate regression fit                          |
+
+For simple Linear Regression with an intercept:
+
+$$
+R^2=r^2
+$$
+
+For example:
+
+$$
+r=0.9
+$$
+
+$$
+R^2=(0.9)^2=0.81
+$$
+
+So the model explains 81% of the variation.
+
+Remember: This relationship does not generally hold for multiple Linear Regression.
+
+---
+
+# 11. All Important Equations at One Place
+
+These are the equations I recommend keeping in your ML notes.
+
+| Concept           | Equation                                                        |
+| ----------------- | --------------------------------------------------------------- |
+| Linear Regression | \(\hat y=b_0+b_1x\)                                             |
+| Slope             | \(b_1=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}\) |
+| Intercept         | \(b_0=\bar y-b_1\bar x\)                                        |
+| Error             | \(e=y-\hat y\)                                                  |
+| MSE               | \(\frac{1}{n}\sum(y_i-\hat y_i)^2\)                             |
+| RMSE              | \(\sqrt{MSE}\)                                                  |
+| Gradient Descent  | \(\theta_{new}=\theta_{old}-\alpha\nabla J(\theta)\)            |
+| R-Squared         | \(1-\frac{SS_{res}}{SS_{tot}}\)                                 |
+| Adjusted R²       | \(1-(1-R^2)\frac{n-1}{n-p-1}\)                                  |
+| Correlation       | \(-1\leq r\leq1\)                                               |
+
+---
+
+# 12. What should you understand practically?
+
+Since you are learning Machine Learning using Python, don't stop with equations and theory.
+
+Try implementing Linear Regression using two approaches.
+
+**Approach 1: From scratch**
+
+Use Python, NumPy and Matplotlib.
+
+Understand:
+
+1. How to load data.
+2. How to calculate slope and intercept.
+3. How to make predictions.
+4. How to calculate MSE.
+5. How Gradient Descent updates parameters.
+6. How to visualize the regression line.
+
+**Approach 2: Using Scikit-learn**
+
+Learn these functions:
+
+```python
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+
+print(model.coef_)
+print(model.intercept_)
+print(model.score(X_test, y_test))
+```
+
+Here:
+
+* `fit()` trains the model.
+* `predict()` makes predictions.
+* `coef_` gives the slope/coefficient.
+* `intercept_` gives the intercept.
+* `score()` returns R² for the supplied dataset.
+
+---
+
+## 13. Important ML Interview Questions
+
+Make sure you can explain these without looking at your notes.
+
+1. What is Linear Regression?
+2. What is the difference between dependent and independent variables?
+3. What is the difference between slope and intercept?
+4. What is a cost function?
+5. Why do we use MSE instead of simply calculating the average error?
+6. What are local minima and global minima?
+7. What is Gradient Descent?
+8. What is the learning rate?
+9. What is convergence?
+10. What happens when the learning rate is too high?
+11. What is the difference between R² and Adjusted R²?
+12. Why can R² increase when unnecessary features are added?
+13. What is correlation?
+14. What is the difference between correlation and regression?
+15. What are the assumptions of Linear Regression?
+
+**My recommendation:** Don't try to memorize all these equations immediately. First understand Linear Regression, slope, intercept, cost function and Gradient Descent. Then move to R² and Adjusted R².
+
+Once these concepts are clear, implementing Linear Regression using NumPy and Scikit-learn will become much easier.
