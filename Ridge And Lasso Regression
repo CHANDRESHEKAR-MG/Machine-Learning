@@ -1,0 +1,314 @@
+# Ridge and Lasso Regression (Regularization in Machine Learning)
+prevent overfitting lasso
+Ridge and Lasso are two important techniques used in Linear Regression to **prevent overfitting and improve model generalization**.
+
+Before understanding them, let's understand why we need them.
+
+## 1. Why do we need Ridge and Lasso?
+
+Suppose you are building a house price prediction model.
+
+You have 10 features:
+
+* House area
+* Number of bedrooms
+* Number of bathrooms
+* Location
+* Number of windows
+* House colour
+* Age of the building
+* Parking space
+* Distance from school
+* Distance from hospital
+
+Your model might learn unnecessary patterns from some features.
+
+This can lead to overfitting.
+
+We need a technique that controls the model's complexity.
+
+This is where **Regularization** comes in.
+
+Regularization is a technique that adds a penalty to the cost function to discourage unnecessarily large model coefficients.
+
+There are two popular regularization techniques:
+
+1. Ridge Regression (L2 Regularization).
+2. Lasso Regression (L1 Regularization).
+
+---
+
+# 2. Ridge Regression (L2 Regularization)
+
+Ridge Regression adds a penalty based on the square of the model coefficients.
+
+### Formula
+
+Ordinary Linear Regression cost function:
+
+$$
+J(\beta)=MSE
+$$
+
+Ridge Regression:
+
+$$
+J(\beta)=MSE+\lambda\sum_{j=1}^{p}\beta_j^2
+$$
+
+Where:
+
+* MSE = Mean Squared Error.
+* λ (Lambda) = Regularization parameter.
+* β = Model coefficients (weights).
+* p = Number of independent features.
+
+### How does it work?
+
+Imagine your model has these coefficients:
+
+| Feature   | Original coefficient |
+| --------- | -------------------: |
+| Area      |                   10 |
+| Bedrooms  |                    8 |
+| Bathrooms |                    6 |
+| Windows   |                    5 |
+
+Ridge Regression tries to reduce the magnitude of these coefficients.
+
+After regularization, imagine they become:
+
+| Feature   | Original | After Ridge |
+| --------- | -------: | ----------: |
+| Area      |       10 |         8.5 |
+| Bedrooms  |        8 |         6.2 |
+| Bathrooms |        6 |         4.1 |
+| Windows   |        5 |         3.3 |
+
+These are illustrative values.
+
+**Important:** Ridge reduces coefficient values but generally does not make them exactly zero.
+
+Therefore, all features usually remain in the model.
+
+### What is Lambda (λ)?
+
+Lambda controls the strength of regularization.
+
+* λ = 0: No regularization; equivalent to ordinary Linear Regression.
+* Small λ: Small penalty.
+* Large λ: Strong penalty; coefficients move closer to zero.
+
+If λ is too large, the model may underfit.
+
+---
+
+# 3. Lasso Regression (L1 Regularization)
+
+Lasso stands for:
+
+**Least Absolute Shrinkage and Selection Operator.**
+
+Like Ridge, it adds a penalty to the cost function.
+
+However, it uses the absolute values of coefficients instead of their squares.
+
+### Formula
+
+$$
+J(\beta)=MSE+\lambda\sum_{j=1}^{p}|\beta_j|
+$$
+
+### How does it work?
+
+Suppose you have these coefficients:
+
+| Feature   | Original coefficient |
+| --------- | -------------------: |
+| Area      |                   10 |
+| Bedrooms  |                    8 |
+| Bathrooms |                    6 |
+| Windows   |                  0.2 |
+
+After applying Lasso, imagine:
+
+| Feature   | Original | After Lasso |
+| --------- | -------: | ----------: |
+| Area      |       10 |         8.2 |
+| Bedrooms  |        8 |         6.1 |
+| Bathrooms |        6 |         3.5 |
+| Windows   |      0.2 |           0 |
+
+These are illustrative values.
+
+Notice something important:
+
+Lasso can make some coefficients exactly zero.
+
+When a coefficient becomes zero, that feature is effectively removed from the model.
+
+Therefore, Lasso performs **automatic feature selection**.
+
+---
+
+# 4. Ridge vs Lasso
+
+This is very important for interviews.
+
+| Parameter         | Ridge                    | Lasso                                |
+| ----------------- | ------------------------ | ------------------------------------ |
+| Regularization    | L2                       | L1                                   |
+| Penalty           | Squared coefficients     | Absolute coefficients                |
+| Coefficients      | Shrinks towards zero     | Can become exactly zero              |
+| Feature selection | No automatic elimination | Yes                                  |
+| Useful when       | Most features contribute | Some features are unnecessary        |
+| Multicollinearity | Helps handle it          | Can select among correlated features |
+| Lambda            | Controls penalty         | Controls penalty                     |
+
+### Easy way to remember
+
+**Ridge = Reduces coefficient values.**
+
+**Lasso = Reduces coefficient values and can eliminate features.**
+
+---
+
+# 5. What happens when Lambda increases?
+
+This is another important concept.
+
+Imagine:
+
+$$
+\lambda=0
+$$
+
+No regularization.
+
+Now increase Lambda:
+
+$$
+\lambda=0.1
+$$
+
+$$
+\lambda=1
+$$
+
+$$
+\lambda=10
+$$
+
+As Lambda increases:
+
+* Ridge coefficients generally shrink towards zero.
+* Lasso coefficients shrink, and some can become zero.
+* Model complexity decreases.
+* Training error generally increases.
+* If the penalty becomes too strong, underfitting can occur.
+
+---
+
+# 6. Why do we use Ridge and Lasso?
+
+Their primary purpose is to reduce overfitting.
+
+For example:
+
+Suppose your model produces:
+
+| Metric            | Without regularization | With regularization |
+| ----------------- | ---------------------: | ------------------: |
+| Training accuracy |                    99% |                 92% |
+| Testing accuracy  |                    65% |                 89% |
+
+These are illustrative values.
+
+The regularized model performs better on unseen data, even though its training performance is lower.
+
+That is the objective of regularization.
+
+---
+
+# 7. Python Implementation
+
+You should know how to implement both using Scikit-learn.
+
+### Ridge Regression
+
+```python
+from sklearn.linear_model import Ridge
+
+model = Ridge(alpha=1.0)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+```
+
+### Lasso Regression
+
+```python
+from sklearn.linear_model import Lasso
+
+model = Lasso(alpha=1.0)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+```
+
+Important:
+
+In Scikit-learn, `alpha` controls regularization strength. It corresponds to the regularization parameter λ conceptually, although exact scaling depends on the implementation's objective-function convention.
+
+**One more important point:** Always consider feature scaling before applying Ridge or Lasso because regularization penalizes coefficients, and features with different scales can affect the penalty.
+
+---
+
+# 8. Important Interview Questions
+
+**Q1. What is regularization?**
+
+Regularization is a technique used to prevent overfitting by adding a penalty term to the model's cost function.
+
+**Q2. What is the difference between Ridge and Lasso?**
+
+Ridge uses L2 regularization and shrinks coefficients towards zero, whereas Lasso uses L1 regularization and can make some coefficients exactly zero.
+
+**Q3. Which one performs feature selection?**
+
+Lasso Regression because it can eliminate features by making their coefficients zero.
+
+**Q4. What happens when Lambda increases?**
+
+The regularization penalty increases, making the model coefficients smaller and potentially causing underfitting if the penalty is too strong.
+
+**Q5. Why is feature scaling important for Ridge and Lasso?**
+
+Because regularization penalizes coefficient magnitudes. Features with different scales can otherwise receive unequal effective penalties.
+
+---
+
+## 9. Quick Revision
+
+Remember these four concepts:
+
+| Concept           | Purpose                                   |
+| ----------------- | ----------------------------------------- |
+| Linear Regression | Predict continuous values                 |
+| Overfitting       | Model memorizes training data             |
+| Ridge             | L2 regularization; shrinks coefficients   |
+| Lasso             | L1 regularization; can eliminate features |
+
+### What should you learn next?
+
+I recommend this order:
+
+1. Elastic Net Regression (combines Ridge and Lasso).
+2. Multicollinearity.
+3. Feature Scaling (StandardScaler and MinMaxScaler).
+4. Cross-Validation.
+5. Polynomial Regression.
+
+**One important interview point:** Ridge, Lasso and Elastic Net are all regularization techniques. They don't change the basic objective of Linear Regression (predicting continuous values); they change how the model is trained to control complexity.
