@@ -1,0 +1,197 @@
+# Overfitting and Underfitting in Machine Learning
+
+These are two of the most important concepts in Machine Learning. They are related to how well a model learns from training data and performs on unseen data.
+
+First, understand one thing:
+
+**The goal of Machine Learning is not just to perform well on training data. The goal is to perform well on new, unseen data.**
+
+Let's understand with an example.
+
+## 1. What is Underfitting?
+
+Underfitting happens when a Machine Learning model is too simple to learn the actual patterns and relationships in the training data.
+
+In simple words, **the model has not learned enough from the data.**
+
+### Example
+
+Suppose you want to predict students' marks based on their study hours.
+
+Your actual data follows a relationship that is not perfectly represented by a simple straight line.
+
+But you train a very simple model that cannot capture the relationship.
+
+As a result:
+
+* Training accuracy is low.
+* Testing accuracy is low.
+* Training error is high.
+* Testing error is high.
+
+This is called Underfitting.
+
+**Reasons for Underfitting:**
+
+1. Model is too simple.
+2. Insufficient training.
+3. Not enough useful features.
+4. Excessive regularization.
+5. Poor feature selection.
+
+**How to overcome Underfitting?**
+
+* Use a more complex model.
+* Add useful features.
+* Train the model longer (where applicable).
+* Reduce excessive regularization.
+
+## 2. What is Overfitting?
+
+Overfitting happens when a Machine Learning model learns the training data too well, including noise and unnecessary patterns.
+
+In simple words, **the model memorizes the training data instead of learning general patterns.**
+
+### Example
+
+Imagine you are preparing for a university examination.
+
+You memorize the answers to only 10 previous questions.
+
+When the examiner asks exactly those 10 questions, you answer everything correctly.
+
+But when the examiner changes the questions slightly, you cannot answer.
+
+This is similar to Overfitting.
+
+In Machine Learning:
+
+* Training accuracy is very high.
+* Testing accuracy is low.
+* Training error is very low.
+* Testing error is high.
+
+**Reasons for Overfitting:**
+
+1. Model is too complex.
+2. Too many unnecessary features.
+3. Insufficient training data.
+4. Training for too long in some iterative models.
+5. Model learns noise in the training data.
+
+**How to overcome Overfitting?**
+
+* Collect more training data.
+* Use regularization (L1 or L2).
+* Reduce model complexity.
+* Perform feature selection.
+* Use cross-validation.
+* Use early stopping where applicable.
+
+---
+
+## 3. Difference Between Underfitting and Overfitting
+
+| Parameter         | Underfitting         | Overfitting             |
+| ----------------- | -------------------- | ----------------------- |
+| Model             | Too simple           | Too complex             |
+| Training error    | High                 | Very low                |
+| Testing error     | High                 | High                    |
+| Training accuracy | Low                  | High                    |
+| Testing accuracy  | Low                  | Low                     |
+| Learning          | Doesn't learn enough | Memorizes training data |
+| Solution          | Increase complexity  | Reduce complexity       |
+
+## 4. Visual Understanding
+
+Imagine three models trying to fit the same dataset.
+
+* **Underfitting:** The model is too simple and misses the actual relationship.
+* **Good fit:** The model captures the underlying pattern.
+* **Overfitting:** The model follows almost every training point, including noise.
+
+The ideal model is the one in the middle.
+
+## 5. What is a Good Fit?
+
+A good-fit model learns the actual patterns in the training data and performs well on unseen testing data.
+
+For example:
+
+| Model        | Training Accuracy | Testing Accuracy |
+| ------------ | ----------------: | ---------------: |
+| Underfitting |               60% |              55% |
+| Good fit     |               92% |              89% |
+| Overfitting  |               99% |              65% |
+
+*These are illustrative values, not actual experimental results.*
+
+Notice that the overfitted model has 99% training accuracy but only 65% testing accuracy.
+
+The good-fit model performs consistently on both datasets.
+
+---
+
+## 6. What is the Bias-Variance Tradeoff?
+
+This is closely related to overfitting and underfitting.
+
+Two important concepts:
+
+**Bias:**
+
+* Error caused by overly simple assumptions in a model.
+* High bias generally leads to underfitting.
+
+**Variance:**
+
+* How much the model's predictions change when trained on different datasets.
+* High variance generally leads to overfitting.
+
+| Underfitting        | Overfitting          |
+| ------------------- | -------------------- |
+| High Bias           | Low Bias             |
+| Low Variance        | High Variance        |
+| Model is too simple | Model is too complex |
+
+The objective is to find a balance between bias and variance.
+
+---
+
+## 7. Important Interview Questions
+
+**Q1. What is overfitting?**
+
+Overfitting occurs when a model learns training data too closely, including noise, and performs poorly on unseen data.
+
+**Q2. What is underfitting?**
+
+Underfitting occurs when a model is too simple to capture the underlying patterns in the training data.
+
+**Q3. How do you identify overfitting?**
+
+By comparing training and testing performance. Very good training performance but significantly worse testing performance indicates possible overfitting.
+
+**Q4. What is the difference between bias and variance?**
+
+Bias is error due to overly simplistic assumptions, whereas variance measures how sensitive a model is to changes in training data.
+
+**Q5. How can you prevent overfitting?**
+
+Using regularization, cross-validation, feature selection, more training data and reducing model complexity.
+
+---
+
+### Remember this simple trick:
+
+* **Underfitting = Model doesn't learn enough.**
+* **Overfitting = Model memorizes too much.**
+* **Good fitting = Model learns the right patterns and generalizes well.**
+
+**My suggestion for your ML learning:** Learn these three topics next:
+
+1. Bias-Variance Tradeoff.
+2. Regularization (L1 and L2).
+3. Train-Test Split and Cross-Validation.
+
+These concepts are directly connected to overfitting and underfitting.
