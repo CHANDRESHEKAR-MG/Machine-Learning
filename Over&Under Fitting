@@ -180,15 +180,14 @@ Bias is error due to overly simplistic assumptions, whereas variance measures ho
 
 Using regularization, cross-validation, feature selection, more training data and reducing model complexity.
 
----
-
-### Remember this simple trick:
+ Remember this simple trick:
 
 * **Underfitting = Model doesn't learn enough.**
 * **Overfitting = Model memorizes too much.**
 * **Good fitting = Model learns the right patterns and generalizes well.**
 
-**My suggestion for your ML learning:** Learn these three topics next:
+**My suggestion for your ML learning:** Learn these three topics next: 
+ 
 
 1. Bias-Variance Tradeoff.
 2. Regularization (L1 and L2).
