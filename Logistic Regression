@@ -1,0 +1,400 @@
+Linear Regression predicts continuous numerical values, whereas Logistic Regression predicts the probability of a class.
+
+Although its name contains "Regression", Logistic Regression is primarily used for Classification problems.
+1. What is Logistic Regression?
+Logistic Regression is a supervised Machine Learning algorithm used to predict the probability of an observation belonging to a particular class.
+
+It is commonly used for binary classification.
+Real-world examples
+Problem	Possible output
+Email classification	Spam / Not Spam
+Disease prediction	Disease / No Disease
+Student result	Pass / Fail
+Loan approval	Approved / Rejected
+Customer prediction	Will leave / Will not leave
+
+
+Example: Student Pass or Fail
+Suppose we have this dataset:
+Study hours	Result
+1	Fail (0)
+2	Fail (0)
+3	Fail (0)
+5	Pass (1)
+6	Pass (1)
+8	Pass (1)
+
+
+We want to predict whether a student will pass or fail based on study hours.
+
+Here:
+- Input (X) = Study hours.
+- Output (Y) = 0 or 1.
+- 0 = Fail.
+- 1 = Pass.
+Our objective is to train a model that predicts the probability of passing.
+2. Why can't we use Linear Regression for Classification?
+This is a very important question.
+
+Linear Regression produces continuous values.
+
+For example:
+\[
+\hat y=b_0+b_1x
+\]
+Suppose we use Linear Regression for the student example.
+
+It might predict:
+- 0.2
+- 0.5
+- 0.8
+- 1.2
+- 1.5
+But our classification output should be between 0 and 1 if we interpret it as a probability.
+
+Predictions such as 1.5 cannot represent probabilities.
+
+We need a function that converts any real-valued input into a value between 0 and 1.
+
+That function is called the Sigmoid Function.
+3. What is the Sigmoid Function?
+The Sigmoid function converts a numerical value into a probability between 0 and 1.
+
+Its mathematical equation is:
+\[
+\sigma(z)=\frac{1}{1+e^{-z}}
+\]
+Where:
+- σ = Sigmoid function.
+- z = Input value.
+- e = Euler's number (approximately 2.718).
+Understanding the output
+Input (z)	Sigmoid output
+-10	0.000045
+-5	0.0067
+-2	0.119
+0	0.5
+2	0.881
+5	0.993
+10	0.99995
+
+
+Notice:
+- When z is very negative, output approaches 0.
+- When z is 0, output is 0.5.
+- When z is very positive, output approaches 1.
+The output is always between 0 and 1.
+Visual understanding
+
+
+
+
+
+
+
+
+
+
+
+Add More
+
+
+
+
+
+
+
+
+        .graphable-function-v2-jsxgraph {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          touch-action: none;
+          background: transparent;
+        }
+
+        .graphable-function-v2-jsxgraph svg {
+          overflow: hidden;
+        }
+
+        .graphable-function-v2-jsxgraph svg :focus:not(:focus-visible) {
+          outline: none;
+        }
+
+        .graphable-function-v2-jsxgraph-inequality-fill {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+        }
+
+        .graphable-function-v2-jsxgraph-explicit-fallback {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+        }
+
+        .graphable-function-v2-jsxgraph-guide {
+          position: absolute;
+          z-index: 2;
+          top: 0;
+          bottom: 0;
+          border-left: 1px dashed var(--border-heavy);
+          pointer-events: none;
+        }
+
+        .graphable-function-v2-jsxgraph-hover-point {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          margin-left: -4px;
+          margin-top: -4px;
+          border: 1.5px solid var(--bg-primary);
+          border-radius: 9999px;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        .graphable-function-v2-jsxgraph-tooltip {
+          position: absolute;
+          z-index: 3;
+          overflow: visible;
+          pointer-events: none;
+        }
+
+        .graphable-function-v2-jsxgraph-reset {
+          position: absolute;
+          left: 12px;
+          bottom: 12px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 2;
+          width: 32px;
+          height: 32px;
+          border: 1px solid var(--border-light);
+          border-radius: 9999px;
+          background: var(--bg-primary);
+          color: var(--text-primary);
+          box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+          padding: 0;
+          transition: opacity 160ms ease, transform 160ms ease;
+        }
+      1−1−2−3−4−4−4−40.20.40.6−0.2−0.2−0.40,0
+
+
+
+
+
+
+
+
+Give feedback
+Notice the S-shaped curve.
+
+This is why the Sigmoid function is also called the S-curve.
+4. How does Logistic Regression work?
+Now let's understand the complete process.
+
+Logistic Regression has two important steps.
+
+Step 1: Calculate the linear combination
+
+First, it calculates:
+\[
+z=b_0+b_1x_1+b_2x_2+\cdots+b_nx_n
+\]
+Where:
+- b₀ = Intercept.
+- b₁, b₂ = Model coefficients.
+- x₁, x₂ = Input features.
+This is similar to Linear Regression.
+
+Step 2: Apply the Sigmoid function
+
+The calculated value is passed through the Sigmoid function.
+\[
+P(Y=1|X)=\frac{1}{1+e^{-z}}
+\]
+This produces the probability of belonging to class 1.
+Example
+Suppose our model predicts:
+\[
+P(Pass)=0.85
+\]
+This means the model estimates an 85% probability of passing.
+
+But how do we convert this probability into Pass or Fail?
+
+We use a Decision Threshold.
+5. What is a Decision Threshold?
+A decision threshold is a value used to convert predicted probabilities into class labels.
+
+The default threshold in binary Logistic Regression is generally 0.5.
+Predicted probability	Prediction
+0.20	Fail (0)
+0.35	Fail (0)
+0.49	Fail (0)
+0.50	Pass (1)
+0.75	Pass (1)
+0.95	Pass (1)
+
+
+The rule is:
+\[
+\hat y=
+\begin{cases}
+1 & P(Y=1|X)\geq0.5\\
+0 & P(Y=1|X)<0.5
+\end{cases}
+\]
+Important: The threshold does not always have to be 0.5. We can adjust it depending on the problem.
+
+For example, in disease detection, we might lower the threshold to identify more potentially positive cases.
+6. What is a Decision Boundary?
+A decision boundary is the boundary that separates different predicted classes.
+
+Imagine plotting students based on study hours.
+
+Students below a certain point might be classified as Fail, while students above that point might be classified as Pass.
+
+The boundary separates these two classes.
+
+For binary Logistic Regression with a 0.5 threshold:
+\[
+P(Y=1|X)=0.5
+\]
+Since:
+\[
+\sigma(0)=0.5
+\]
+The decision boundary occurs when:
+\[
+z=0
+\]
+Therefore:
+\[
+b_0+b_1x_1+\cdots+b_nx_n=0
+\]
+For a model with multiple features, this boundary is a hyperplane.
+7. What is the Cost Function in Logistic Regression?
+Remember Linear Regression?
+
+We used Mean Squared Error (MSE) to measure prediction errors.
+
+In Logistic Regression, we commonly use Log Loss (Binary Cross-Entropy).
+
+Why?
+
+Because Logistic Regression predicts probabilities, and Log Loss measures how well those probabilities match the actual class labels.
+Formula
+\[
+J=-\frac{1}{n}\sum_{i=1}^{n}
+[y_i\log(\hat y_i)+(1-y_i)\log(1-\hat y_i)]
+\]
+Where:
+- n = Number of observations.
+- y = Actual class (0 or 1).
+- ŷ = Predicted probability.
+Simple understanding
+Suppose the actual result is Pass (1).
+
+Case 1:
+
+Predicted probability = 0.95.
+
+The model is confident and correct.
+
+Log loss is low.
+
+Case 2:
+
+Predicted probability = 0.10.
+
+The model is confident but wrong.
+
+Log loss is high.
+
+Therefore, Logistic Regression tries to minimize Log Loss.
+8. How does Logistic Regression learn?
+Similar to Linear Regression, Logistic Regression learns its coefficients by minimizing a cost function.
+
+A common optimization algorithm is Gradient Descent.
+
+The parameter update equation is:
+\[
+\theta_{new}=
+\theta_{old}-\alpha\frac{\partial J}{\partial\theta}
+\]
+Where:
+- θ = Model parameters.
+- α = Learning rate.
+- J = Log Loss.
+The algorithm repeatedly updates the coefficients to reduce the loss.
+
+Eventually, it converges towards a minimum of the cost function.
+
+An important mathematical point: Logistic Regression's binary cross-entropy objective is convex with respect to its coefficients, assuming the standard linear model without additional non-convex components.
+9. Types of Logistic Regression
+There are three commonly discussed types.
+Type	Purpose	Example
+Binary Logistic Regression	Two classes	Pass / Fail
+Multinomial Logistic Regression	More than two unordered classes	Cat / Dog / Horse
+Ordinal Logistic Regression	Ordered classes	Low / Medium / High
+
+
+For now, concentrate on Binary Logistic Regression.
+10. Difference Between Linear and Logistic Regression
+This is a frequently asked interview question.
+Parameter	Linear Regression	Logistic Regression
+Purpose	Regression	Classification
+Output	Continuous value	Probability
+Function	Linear equation	Sigmoid (binary case)
+Output range	Unbounded	0 to 1
+Cost function	MSE (commonly)	Log Loss
+Example	House price prediction	Spam detection
+Evaluation	MSE, RMSE, R²	Accuracy, Precision, Recall, F1
+
+
+11. Python Implementation
+Let's implement Logistic Regression using Scikit-learn.
+from sklearn.linear_model import LogisticRegressionfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import accuracy_score# Split the datasetX_train, X_test, y_train, y_test = train_test_split(    X, y, test_size=0.2, random_state=42)# Create modelmodel = LogisticRegression()# Train modelmodel.fit(X_train, y_train)# Predict classespredictions = model.predict(X_test)# Predict probabilitiesprobabilities = model.predict_proba(X_test)# Evaluateprint(accuracy_score(y_test, predictions))
+
+
+Understand these methods:
+Method	Purpose
+fit()	Train the model
+predict()	Predict class labels
+predict_proba()	Predict class probabilities
+coef_	Model coefficients
+intercept_	Model intercept
+
+
+12. Important Interview Questions
+1. What is Logistic Regression?
+2. Why is Logistic Regression used for classification?
+3. Why can't we directly use Linear Regression for classification?
+4. What is the Sigmoid function?
+5. Why does Sigmoid produce values between 0 and 1?
+6. What is a decision threshold?
+7. What is a decision boundary?
+8. What is Log Loss?
+9. Why do we use Log Loss instead of MSE?
+10. What is the difference between Linear and Logistic Regression?
+11. What are the types of Logistic Regression?
+12. What happens when we change the decision threshold?
+13. Important Equations for Your Notes
+Concept	Equation
+Linear combination	\(z=b_0+\sum b_ix_i\)
+Sigmoid	\(\sigma(z)=\frac{1}{1+e^{-z}}\)
+Probability	\(P(Y=1\mid X)=\sigma(z)\)
+Decision boundary	\(z=0\) (for threshold 0.5)
+Log Loss	\(-\frac1n\sum[y\log(\hat y)+(1-y)\log(1-\hat y)]\)
+Gradient Descent	\(\theta_{new}=\theta_{old}-\alpha\nabla J(\theta)\)
